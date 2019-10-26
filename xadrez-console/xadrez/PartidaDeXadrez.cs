@@ -8,12 +8,14 @@ namespace xadrez
         public Tabuleiro Tab { get; private set; }
         private int Turno;
         private Cor JogadorAtual;
+        public bool Terminada { get; private set; }
 
         public PartidaDeXadrez()
         {
             Tab = new Tabuleiro(8, 8);
             Turno = 1;
             JogadorAtual = Cor.Branca;
+            Terminada = false;
             ColocarPecas();
         }
 
