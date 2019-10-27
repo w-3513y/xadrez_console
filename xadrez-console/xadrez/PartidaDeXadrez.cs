@@ -13,6 +13,17 @@ namespace xadrez
         private HashSet<Peca> Pecas;
         private HashSet<Peca> PecasCapturadas;
 
+        public PartidaDeXadrez()
+        {
+            Tab = new Tabuleiro(8, 8);
+            Turno = 1;
+            JogadorAtual = Cor.Branca;
+            Terminada = false;
+            Pecas = new HashSet<Peca>();
+            PecasCapturadas = new HashSet<Peca>();
+            ColocarPecas();
+        }
+
         public HashSet<Peca> PecaCapturada(Cor cor)
         {
             HashSet<Peca> aux = new HashSet<Peca>();
@@ -60,17 +71,6 @@ namespace xadrez
             ColocarNovaPeca('e', 7, new Torre(Tab, Cor.Preta));
             ColocarNovaPeca('e', 8, new Torre(Tab, Cor.Preta));
             ColocarNovaPeca('d', 8, new Rei(Tab, Cor.Preta));
-        }
-
-        public PartidaDeXadrez()
-        {
-            Tab = new Tabuleiro(8, 8);
-            Turno = 1;
-            JogadorAtual = Cor.Branca;
-            Terminada = false;
-            Pecas = new HashSet<Peca>();
-            PecasCapturadas = new HashSet<Peca>();
-            ColocarPecas();
         }
 
         private void ExecutaMovimento(Posicao origem, Posicao destino)
