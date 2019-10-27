@@ -42,7 +42,7 @@ namespace xadrez
         public HashSet<Peca> PecasEmJogo(Cor cor)
         {
             HashSet<Peca> aux = new HashSet<Peca>();
-            foreach (Peca p in PecasCapturadas)
+            foreach (Peca p in Pecas)
             {
                 if (p.Cor == cor)
                 {
