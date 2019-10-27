@@ -20,6 +20,12 @@
             QtdMovimentos++;
         }
 
+        public void DecrementarQtdMovimentos()
+        {
+            QtdMovimentos--;
+        }
+
+
         protected bool PodeMover(Posicao pos)
         {
             Peca p = Tabuleiro.Peca(pos);
