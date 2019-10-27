@@ -13,11 +13,35 @@ namespace xadrez_console
             Console.WriteLine();
             ImprimirPecasCapturadas(partida);
             Console.WriteLine();
-            Console.WriteLine("Turno: "+ partida.Turno);
-            Console.WriteLine("Aguardando jogada: "+partida.JogadorAtual);
-            if (partida.Xeque)
+            Console.WriteLine("Turno: " + partida.Turno);
+            if (!partida.Terminada)
             {
-                Console.WriteLine("XEQUE!");
+                Console.WriteLine("Aguardando jogada: " + partida.JogadorAtual);
+                if (partida.Xeque)
+                {
+                    Console.WriteLine("XEQUE!");
+                }
+                Console.WriteLine("");
+                Console.Write("Origem: ");
+                Posicao origem = Tela.LerPosicaoXadrez().ToPosicao();
+                partida.ValidarPosicaodeOrigem(origem);
+
+                bool[,] posicoesPossiveis = partida.Tab.Peca(origem).MovimentosPosiveis();
+
+                Console.Clear();
+                Tela.ImprimirTabuleiro(partida.Tab, posicoesPossiveis);
+
+                Console.WriteLine();
+                Console.Write("Destino: ");
+                Posicao destino = Tela.LerPosicaoXadrez().ToPosicao();
+                partida.ValidarPosicaodeDestino(origem, destino);
+                partida.RealizaJogada(origem, destino);
+
+            } else
+            {
+                Console.WriteLine("XEQUEMATE!");
+                Console.WriteLine("Vencedor: " + partida.JogadorAtual);
+
             }
 
         }
@@ -39,9 +63,9 @@ namespace xadrez_console
         public static void ImprimirConjunto(HashSet<Peca> conjunto)
         {
             Console.Write("[");
-            foreach(Peca p in conjunto)
+            foreach (Peca p in conjunto)
             {
-                Console.Write(p+ " ");
+                Console.Write(p + " ");
             }
             Console.Write("]");
         }
@@ -108,12 +132,12 @@ namespace xadrez_console
             {
                 if (peca.Cor == Cor.Branca)
                 {
-                    Console.Write(peca+" ");
+                    Console.Write(peca + " ");
                 } else
                 {
                     ConsoleColor aux = Console.ForegroundColor;
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.Write(peca+" ");
+                    Console.Write(peca + " ");
                     Console.ForegroundColor = aux;
                 }
             }
