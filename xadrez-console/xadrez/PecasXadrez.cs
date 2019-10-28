@@ -4,13 +4,20 @@ namespace xadrez
 {
     class Rei : Peca
     {
-        public Rei(Tabuleiro tabuleiro, Cor cor) : base(tabuleiro, cor)
+        private PartidaDeXadrez Partida;
+        public Rei(Tabuleiro tabuleiro, Cor cor, PartidaDeXadrez partida) : base(tabuleiro, cor)
         {
-
+            Partida = partida;
         }
         public override string ToString()
         {
             return "R";
+        }
+
+        private bool TesteTorreParaRoque(Posicao posicao)
+        {
+            Peca peca = Tabuleiro.Peca(posicao);
+            return peca != null && peca is Torre && peca.Cor == Cor && peca.QtdMovimentos == 0;
         }
 
         public override bool[,] MovimentosPosiveis()
@@ -65,7 +72,34 @@ namespace xadrez
             {
                 matriz[posicao.Linha, posicao.Coluna] = true;
             }
+            //#jogadaEspecial
+            if (QtdMovimentos == 0 && !Partida.Xeque)
+            {
+                //roque pequeno
+                Posicao posTorre1 = new Posicao(Posicao.Linha, Posicao.Coluna + 3);
+                if (TesteTorreParaRoque(posTorre1))
+                {
+                    Posicao p1 = new Posicao(Posicao.Linha, Posicao.Coluna + 1);
+                    Posicao p2 = new Posicao(Posicao.Linha, Posicao.Coluna + 2);
+                    if (Tabuleiro.Peca(p1) == null && Tabuleiro.Peca(p2) == null)
+                    {
+                        matriz[posicao.Linha, posicao.Coluna + 2] = true;
+                    }
+                }
+                //roque grande
+                Posicao posTorre2 = new Posicao(Posicao.Linha, Posicao.Coluna - 4);
+                if (TesteTorreParaRoque(posTorre2))
+                {
+                    Posicao p1 = new Posicao(Posicao.Linha, Posicao.Coluna - 1);
+                    Posicao p2 = new Posicao(Posicao.Linha, Posicao.Coluna - 2);
+                    Posicao p3 = new Posicao(Posicao.Linha, Posicao.Coluna - 3);
+                    if (Tabuleiro.Peca(p1) == null && Tabuleiro.Peca(p2) == null && Tabuleiro.Peca(p3) == null)
+                    {
+                        matriz[posicao.Linha, posicao.Coluna - 2] = true;
+                    }
+                }
 
+            }
             return matriz;
 
 
@@ -153,7 +187,7 @@ namespace xadrez
             bool[,] matriz = new bool[Tabuleiro.Linhas, Tabuleiro.Colunas];
             Posicao posicao = new Posicao(0, 0);
             //noroeste
-            posicao.DefinirValores(Posicao.Linha - 1, Posicao.Coluna -1);
+            posicao.DefinirValores(Posicao.Linha - 1, Posicao.Coluna - 1);
             while (Tabuleiro.PosicaoValida(posicao) && PodeMover(posicao))
             {
                 matriz[posicao.Linha, posicao.Coluna] = true;
@@ -215,7 +249,7 @@ namespace xadrez
         {
             bool[,] matriz = new bool[Tabuleiro.Linhas, Tabuleiro.Colunas];
             Posicao posicao = new Posicao(0, 0);
-            
+
             posicao.DefinirValores(Posicao.Linha - 1, Posicao.Coluna - 2);
             if (Tabuleiro.PosicaoValida(posicao) && PodeMover(posicao))
             {
@@ -380,7 +414,8 @@ namespace xadrez
             return "P";
         }
 
-        private bool ExisteInimigo(Posicao posicao){
+        private bool ExisteInimigo(Posicao posicao)
+        {
             Peca p = Tabuleiro.Peca(posicao);
             return p != null && p.Cor != Cor;
         }
