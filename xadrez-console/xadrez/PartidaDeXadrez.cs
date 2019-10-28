@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using tabuleiro;
 
 
@@ -134,18 +135,38 @@ namespace xadrez
 
         private void ColocarPecas()
         {
-            ColocarNovaPeca('c', 1, new Torre(Tab, Cor.Branca));
-            ColocarNovaPeca('c', 2, new Torre(Tab, Cor.Branca));
-            ColocarNovaPeca('d', 2, new Torre(Tab, Cor.Branca));
-            ColocarNovaPeca('e', 1, new Torre(Tab, Cor.Branca));
-            ColocarNovaPeca('e', 2, new Torre(Tab, Cor.Branca));
-            ColocarNovaPeca('d', 1, new Rei(Tab, Cor.Branca));
-            ColocarNovaPeca('c', 7, new Torre(Tab, Cor.Preta));
-            ColocarNovaPeca('c', 8, new Torre(Tab, Cor.Preta));
-            ColocarNovaPeca('d', 7, new Torre(Tab, Cor.Preta));
-            ColocarNovaPeca('e', 7, new Torre(Tab, Cor.Preta));
-            ColocarNovaPeca('e', 8, new Torre(Tab, Cor.Preta));
-            ColocarNovaPeca('d', 8, new Rei(Tab, Cor.Preta));
+            Cor[] cores = { Cor.Branca, Cor.Preta };
+            Char[] letras = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' };
+            foreach(Cor c in cores)
+            {
+                int n1;
+                if (c == Cor.Branca)
+                {
+                    n1 = 1;
+                } else
+                {
+                    n1 = 8;
+                }
+                ColocarNovaPeca('a', n1, new Torre(Tab, c));
+                ColocarNovaPeca('b', n1, new Cavalo(Tab, c));
+                ColocarNovaPeca('c', n1, new Bispo(Tab, c));
+                ColocarNovaPeca('d', n1, new Dama(Tab, c));
+                ColocarNovaPeca('e', n1, new Rei(Tab, c));
+                ColocarNovaPeca('f', n1, new Bispo(Tab, c));
+                ColocarNovaPeca('g', n1, new Cavalo(Tab, c));
+                ColocarNovaPeca('h', n1, new Torre(Tab, c));
+                foreach(Char l in letras)
+                {
+                    if (c == Cor.Branca)
+                    {
+                        ColocarNovaPeca(l, 2, new Peao(Tab, c));
+                    } else
+                    {
+                        ColocarNovaPeca(l, 7, new Peao(Tab, c));
+                    }
+                    
+                }
+            }
         }
 
         private Peca ExecutaMovimento(Posicao origem, Posicao destino)
