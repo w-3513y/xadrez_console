@@ -454,14 +454,14 @@ namespace xadrez
                     matriz[posicao.Linha, posicao.Coluna] = true;
                 }
                 //#jogadaEspecial En Passant
-                if (posicao.Linha == 3)
+                if (Posicao.Linha == 3)
                 {
-                    Posicao esquerda = new Posicao(posicao.Linha, posicao.Coluna - 1);
+                    Posicao esquerda = new Posicao(Posicao.Linha, Posicao.Coluna - 1);
                     if (Tabuleiro.PosicaoValida(esquerda) && ExisteInimigo(esquerda) && Tabuleiro.Peca(esquerda) == Partida.VuneravelEnPassant)
                     {
                         matriz[esquerda.Linha - 1, esquerda.Coluna] = true;                                                                                  
                     }
-                    Posicao direita = new Posicao(posicao.Linha, posicao.Coluna + 1);
+                    Posicao direita = new Posicao(Posicao.Linha, Posicao.Coluna + 1);
                     if (Tabuleiro.PosicaoValida(direita) && ExisteInimigo(direita) && Tabuleiro.Peca(direita) == Partida.VuneravelEnPassant)
                     {
                         matriz[direita.Linha - 1, direita.Coluna] = true;
@@ -490,14 +490,14 @@ namespace xadrez
                     matriz[posicao.Linha, posicao.Coluna] = true;
                 }
                 //#jogadaEspecial En Passant
-                if (posicao.Linha == 4)
+                if (Posicao.Linha == 4)
                 {
-                    Posicao esquerda = new Posicao(posicao.Linha, posicao.Coluna - 1);
+                    Posicao esquerda = new Posicao(Posicao.Linha, Posicao.Coluna - 1);
                     if (Tabuleiro.PosicaoValida(esquerda) && ExisteInimigo(esquerda) && Tabuleiro.Peca(esquerda) == Partida.VuneravelEnPassant)
                     {
                         matriz[esquerda.Linha + 1, esquerda.Coluna] = true;
                     }
-                    Posicao direita = new Posicao(posicao.Linha, posicao.Coluna + 1);
+                    Posicao direita = new Posicao(Posicao.Linha, Posicao.Coluna + 1);
                     if (Tabuleiro.PosicaoValida(direita) && ExisteInimigo(direita) && Tabuleiro.Peca(direita) == Partida.VuneravelEnPassant)
                     {
                         matriz[direita.Linha + 1, direita.Coluna] = true;
