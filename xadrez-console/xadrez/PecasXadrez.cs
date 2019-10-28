@@ -83,7 +83,8 @@ namespace xadrez
                     Posicao p2 = new Posicao(Posicao.Linha, Posicao.Coluna + 2);
                     if (Tabuleiro.Peca(p1) == null && Tabuleiro.Peca(p2) == null)
                     {
-                        matriz[posicao.Linha, posicao.Coluna + 2] = true;
+                        //não vou utilizar o definir posicao, pois p1/p2 garantem que é possível 
+                        matriz[Posicao.Linha, Posicao.Coluna + 2] = true;
                     }
                 }
                 //roque grande
@@ -95,7 +96,7 @@ namespace xadrez
                     Posicao p3 = new Posicao(Posicao.Linha, Posicao.Coluna - 3);
                     if (Tabuleiro.Peca(p1) == null && Tabuleiro.Peca(p2) == null && Tabuleiro.Peca(p3) == null)
                     {
-                        matriz[posicao.Linha, posicao.Coluna - 2] = true;
+                        matriz[Posicao.Linha, Posicao.Coluna - 2] = true;
                     }
                 }
 
