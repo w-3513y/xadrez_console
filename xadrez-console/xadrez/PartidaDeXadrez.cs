@@ -82,7 +82,8 @@ namespace xadrez
         public bool EstaEmXeque(Cor cor)
         {
             Peca x = PecaRei(cor);
-            if (x == null)
+            //verificar o problema da excessão que ocorre aqui
+           if (x == null) 
             {
                 throw new TabuleiroException("Não tem rei da cor " + cor + " no tabuleiro!");
             }

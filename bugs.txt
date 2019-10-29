@@ -2,8 +2,4 @@ xequemate não está funcionando
 RealizaJogada Exception não está funcionando - funciona somente quando vc movimenta (correto?)
 Não tem rei da cor branca no tabuleiro - mensagem está vindo antes do rei ser pego
 Após o rei ser pego o jogo não está acabando
-Roque pequeno/grande não funcionando
-En Passant não funcionando
-Promoção - Quando está dando promoção está constando como peça capturada (o peão)
-
-
+Em Algum momento as peças capturadas estão se perdendo
