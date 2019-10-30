@@ -24,9 +24,9 @@ namespace xadrez
             Terminada = false;
             Pecas = new HashSet<Peca>();
             PecasCapturadas = new HashSet<Peca>();
-            ColocarPecas();
             Xeque = false;
             VuneravelEnPassant = null;
+            ColocarPecas();
         }
 
         public HashSet<Peca> PecaCapturada(Cor cor)
@@ -82,8 +82,8 @@ namespace xadrez
         public bool EstaEmXeque(Cor cor)
         {
             Peca x = PecaRei(cor);
-            //verificar o problema da excessão que ocorre aqui
-           if (x == null) 
+            //pela regra do xadrez o rei nunca será capturado
+            if (x == null)
             {
                 throw new TabuleiroException("Não tem rei da cor " + cor + " no tabuleiro!");
             }
@@ -228,6 +228,7 @@ namespace xadrez
             if (pecaCapturada != null)
             {
                 Tab.ColocarPeca(pecaCapturada, destino);
+                PecasCapturadas.Remove(pecaCapturada);
             }
             Tab.ColocarPeca(p, origem);
             //#jogadaEspecal roque pequeno
@@ -280,7 +281,7 @@ namespace xadrez
             //#jogadaEspecial Promocao
             if (p is Peao)
             {
-                if ((p.Cor == Cor.Branca && destino.Linha == 0) ||(p.Cor == Cor.Preta && destino.Linha == 7))
+                if ((p.Cor == Cor.Branca && destino.Linha == 0) || (p.Cor == Cor.Preta && destino.Linha == 7))
                 {
                     p = Tab.RetirarPeca(destino);
                     Pecas.Remove(p);
