@@ -28,18 +28,18 @@
 
         protected bool PodeMover(Posicao pos)
         {
-            Peca p = Tabuleiro.Peca(pos);
-            return p == null || p.Cor != Cor;
+            Peca peca = Tabuleiro.Peca(pos);
+            return peca == null || peca.Cor != Cor;
         }
 
         public bool ExisteMovimentosPossiveis()
         {
-            bool[,] mat = MovimentosPosiveis();
+            bool[,] matriz = MovimentosPosiveis();
             for (int i = 0; i < Tabuleiro.Linhas; i++)
             {
                 for (int j = 0; j < Tabuleiro.Colunas; j++)
                 {
-                    if (mat[i, j])
+                    if (matriz[i, j])
                     {
                         return true;
                     }

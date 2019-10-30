@@ -9,7 +9,7 @@ namespace xadrez_console
     {
         public static void ImprimirPartida(PartidaDeXadrez partida)
         {
-            ImprimirTabuleiro(partida.Tab);
+            ImprimirTabuleiro(partida.Tabuleiro);
             Console.WriteLine();
             ImprimirPecasCapturadas(partida);
             Console.WriteLine();
@@ -26,10 +26,10 @@ namespace xadrez_console
                 Posicao origem = Tela.LerPosicaoXadrez().ToPosicao();
                 partida.ValidarPosicaodeOrigem(origem);
 
-                bool[,] posicoesPossiveis = partida.Tab.Peca(origem).MovimentosPosiveis();
+                bool[,] posicoesPossiveis = partida.Tabuleiro.Peca(origem).MovimentosPosiveis();
 
                 Console.Clear();
-                Tela.ImprimirTabuleiro(partida.Tab, posicoesPossiveis);
+                Tela.ImprimirTabuleiro(partida.Tabuleiro, posicoesPossiveis);
 
                 Console.WriteLine();
                 Console.Write("Destino: ");
@@ -71,14 +71,14 @@ namespace xadrez_console
         }
 
 
-        public static void ImprimirTabuleiro(Tabuleiro tab)
+        public static void ImprimirTabuleiro(Tabuleiro tabuleiro)
         {
-            for (int i = 0; i < tab.Linhas; i++)
+            for (int i = 0; i < tabuleiro.Linhas; i++)
             {
                 Console.Write(8 - i + " ");
-                for (int j = 0; j < tab.Colunas; j++)
+                for (int j = 0; j < tabuleiro.Colunas; j++)
                 {
-                    ImprimirPeca(tab.Peca(i, j));
+                    ImprimirPeca(tabuleiro.Peca(i, j));
 
                 }
                 Console.WriteLine();
