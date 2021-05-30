@@ -339,6 +339,19 @@ namespace xadrez
             }
         }
 
+        public void ValidarPosicaoExistente(char coluna, int linha)
+        {
+            List<char> _colunas = new List<char>() { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' };
+            if (_colunas.IndexOf(coluna) == -1)
+            {
+                throw new TabuleiroException("Coluna escolhida não existe! Colunas válidas: a, b, c, d, e, f, g, h. Exemplo: a3");
+            }
+            else if (linha > 8 || linha < 1)
+            {
+                throw new TabuleiroException("Linha escolhida não existe! Linhas válidas: 1, 2, 3, 4, 5, 6, 7, 8. Exemplo: b8");
+            }
+
+        }
         private void MudaJogador()
         {
             if (JogadorAtual == Cor.Branca)

@@ -23,7 +23,7 @@ namespace xadrez_console
                 }
                 Console.WriteLine("");
                 Console.Write("Origem: ");
-                Posicao origem = Tela.LerPosicaoXadrez().ToPosicao();
+                Posicao origem = Tela.LerPosicaoXadrez(partida).ToPosicao();
                 partida.ValidarPosicaodeOrigem(origem);
 
                 bool[,] posicoesPossiveis = partida.Tabuleiro.Peca(origem).MovimentosPosiveis();
@@ -33,7 +33,7 @@ namespace xadrez_console
 
                 Console.WriteLine();
                 Console.Write("Destino: ");
-                Posicao destino = Tela.LerPosicaoXadrez().ToPosicao();
+                Posicao destino = Tela.LerPosicaoXadrez(partida).ToPosicao();
                 partida.ValidarPosicaodeDestino(origem, destino);
                 partida.RealizaJogada(origem, destino);
 
@@ -115,11 +115,13 @@ namespace xadrez_console
             Console.BackgroundColor = fundoOriginal;
         }
 
-        public static PosicaoXadrez LerPosicaoXadrez()
+        public static PosicaoXadrez LerPosicaoXadrez(PartidaDeXadrez partida)
         {
+
             string s = Console.ReadLine();
             char coluna = s[0];
-            int linha = int.Parse(s[1] + "");
+            int.TryParse(s[1] + "", out int linha);
+            partida.ValidarPosicaoExistente(coluna, linha);
             return new PosicaoXadrez(coluna, linha);
         }
 
